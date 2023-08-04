@@ -38,8 +38,6 @@ namespace Tuch.Hooks
         FLabel digiSingle_1;
         FLabel digiSingle_2;
 
-        FLabel debugLabel;
-
         int counter;
         int lastCounter;
         int syncGoalCounter;
@@ -75,12 +73,6 @@ namespace Tuch.Hooks
 
             digiSingle_2 = GetNewDigiLabel();
             hud.fContainers[0].AddChild(digiSingle_2);
-
-            debugLabel = new FLabel(Custom.GetFont(), "") { x = 200, y = 200, isVisible = true, alpha = 1f };
-            hud.fContainers[0].AddChild(debugLabel);
-
-            Debug.Log("Init gamehud");
-            StartTimer();
         }
 
         #endregion
@@ -95,12 +87,6 @@ namespace Tuch.Hooks
                 counter -= InternalGetTickStep(counter, syncGoalCounter);
                 syncGoalCounter--;
             }
-
-            if (Input.GetKey(KeyCode.N))
-            {
-                ResetCounter(20 * 40);
-                StartTimer();
-            }
         }
 
         public override void Draw(float timeStacker)
@@ -110,6 +96,21 @@ namespace Tuch.Hooks
             UpdateLabels(Mathf.Max(0f, smoothCounter), timeStacker);
             if (smoothCounter <= 0f)
                 StopTimer();
+        }
+
+        public override void ClearSprites()
+        {
+            digiTen_1.isVisible = false;
+            digiTen_1.RemoveFromContainer();
+
+            digiTen_2.isVisible = false;
+            digiTen_2.RemoveFromContainer();
+
+            digiSingle_1.isVisible = false;
+            digiSingle_1.RemoveFromContainer();
+
+            digiSingle_2.isVisible = false;
+            digiSingle_2.RemoveFromContainer();
         }
 
         void UpdateLabels(float floatIndex,float timeStacker)
@@ -166,8 +167,7 @@ namespace Tuch.Hooks
             float t = floatIndex - (float)index;
             float reverseT = 1f - t;
             reverseT = CubicBezier(1f, 0f, 1f, 0f, reverseT);
-            debugLabel.text = $"floatIndex={floatIndex},reversT={reverseT},scrollTen={scrollDigiTen},timeStacker={timeStacker}\nlastSoundIndex={lastSoundIndex},shouldplaysound={(lastSoundIndex - floatIndex) - (1f / InternalGetFreq(floatIndex))}";
-
+            
             #region single
             if (index >= 10)
                 digiSingle_1.x = anchor.x + (textRectSize * 0.6f);
