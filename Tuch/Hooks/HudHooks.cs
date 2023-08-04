@@ -88,11 +88,11 @@ namespace Tuch.Hooks
                 syncGoalCounter--;
             }
 
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                ResetCounter(20 * 40);
-                StartTimer();
-            }
+            //if (Input.GetKeyDown(KeyCode.N))
+            //{
+            //    ResetCounter(20 * 40);
+            //    StartTimer();
+            //}
         }
 
         public override void Draw(float timeStacker)
@@ -147,7 +147,7 @@ namespace Tuch.Hooks
 
         float InternalGetFreq(float index)
         {
-            return 1;
+            //return 1;
 
             if (index > 10)
                 return 1;
