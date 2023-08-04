@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tuch", "Tuch\Tuch.csproj", "{61C5F8B9-462B-4C02-A6C4-262AC5FB0922}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61C5F8B9-462B-4C02-A6C4-262AC5FB0922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C5F8B9-462B-4C02-A6C4-262AC5FB0922}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C5F8B9-462B-4C02-A6C4-262AC5FB0922}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C5F8B9-462B-4C02-A6C4-262AC5FB0922}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {312AC6C4-CDA3-4CA9-82B8-8FD3F5E67C2D}
+	EndGlobalSection
+EndGlobal
