@@ -71,7 +71,7 @@ namespace Tuch
         public static Func<Player, object, bool> TrySetValueForPlayer;
 
         public static TryGetImportantValueDel TryGetImportantValue;
-        public static Func<object, bool> TrySendImportantValue;
+        public static Func<object,bool , bool> TrySendImportantValue;
 
         public static Func<Player, string, bool> SendMessage;
         public static Action<Action<string[]>> RegisterCommandEvent;
@@ -87,11 +87,14 @@ namespace Tuch
     {
         public bool isGhost;
         public byte counter;
+     
 
     }
     public class TCPTuchData
     {
         public int nextGhost;
         public byte state; // burst : 2 startgame : 1
+        public byte maxCount;
+        public byte countDown;
     }
 }
