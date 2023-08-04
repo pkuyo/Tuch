@@ -94,7 +94,6 @@ namespace Tuch.Hooks
         {
             orig(self, manager);
             gameStart = false;
-            ghostPlayer = null;
             voidChains = null;
         }
 
@@ -217,7 +216,6 @@ namespace Tuch.Hooks
         public static byte countDown;
         public static int keepAlive;
 
-        public static Player ghostPlayer;
 
         private static readonly ConditionalWeakTable<Player, PlayerModule> modules = new ConditionalWeakTable<Player, PlayerModule>();
 
@@ -280,7 +278,6 @@ namespace Tuch.Hooks
                                 //TrySetValueForPlayer的状态数据如果在不更改情况下会保持原状态发送
                                 isGhost = false;
                                 TrySetValueForPlayer(player, new TuchData() { isGhost = isGhost });
-                                ghostPlayer = creature;
                                 SendMessage(player, $"Catch : {GetPlayerNetName(creature)}");
 
                                 break;
