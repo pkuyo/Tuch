@@ -316,6 +316,8 @@ namespace Tuch.Hooks
         /// </summary>
         public void StartTimer()
         {
+            if (reval)
+                return;
             reval = true;
             syncGoalCounter = counter;
         }
@@ -326,6 +328,8 @@ namespace Tuch.Hooks
         /// </summary>
         public void StopTimer(bool playSound = false)
         {
+            if (!reval)
+                return;
             reval = false;
             if (playSound) InternalPlaySound();
         }
