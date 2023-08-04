@@ -87,6 +87,12 @@ namespace Tuch.Hooks
                 counter -= InternalGetTickStep(counter, syncGoalCounter);
                 syncGoalCounter--;
             }
+
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                ResetCounter(20 * 40);
+                StartTimer();
+            }
         }
 
         public override void Draw(float timeStacker)
@@ -95,7 +101,7 @@ namespace Tuch.Hooks
             smoothCounter = Mathf.Lerp(lastCounter / 40f, counter / 40f, timeStacker);
             UpdateLabels(Mathf.Max(0f, smoothCounter), timeStacker);
             if (smoothCounter <= 0f)
-                StopTimer();
+                StopTimer(true);
         }
 
         public override void ClearSprites()
@@ -127,15 +133,22 @@ namespace Tuch.Hooks
             if ((lastSoundIndex - floatIndex) >= (1f / freq))
             {
                 lastSoundIndex = floatIndex;
-                if (playerRef.TryGetTarget(out var player))
-                    cam.room.PlaySound(SoundID.Gate_Clamp_Lock, player.mainBodyChunk, false, 1f, 40f + Random.value);
+                InternalPlaySound();
             }
 
             InternalUpdateScroll(intIndex, lastIndex, floatIndex, timeStacker);
         }
 
+        void InternalPlaySound()
+        {
+            if (playerRef.TryGetTarget(out var player))
+                cam.room.PlaySound(SoundID.Gate_Clamp_Lock, player.mainBodyChunk, false, 1f, 40f + Random.value);
+        }
+
         float InternalGetFreq(float index)
         {
+            return 1;
+
             if (index > 10)
                 return 1;
             if (index > 6)
@@ -311,9 +324,10 @@ namespace Tuch.Hooks
         /// <summary>
         /// 关闭计时器，隐藏计时器的同时停止计时，并不会自动重置计时器的值
         /// </summary>
-        public void StopTimer()
+        public void StopTimer(bool playSound = false)
         {
             reval = false;
+            if (playSound) InternalPlaySound();
         }
     }
 }
