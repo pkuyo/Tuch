@@ -145,7 +145,7 @@ namespace Tuch.Hooks
         public static bool gameStart;
         public static List<Player> inGamePlayer;
         public static int chainsActiveTime;
-        private static ConditionalWeakTable<Player, PlayerModule> modules = new ConditionalWeakTable<Player, PlayerModule>();
+        internal static ConditionalWeakTable<Player, PlayerModule> modules = new ConditionalWeakTable<Player, PlayerModule>();
         public class PlayerModule
         {
             public WeakReference<Player> playerRef;

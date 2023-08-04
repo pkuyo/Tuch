@@ -18,17 +18,17 @@ namespace Tuch
             try
             {
                 typeof(GhostPlayerImports).ModInterop();
-                enableGhostPlayer = GhostPlayerImports.Register != null;
+               
                 
 
                 if (enableGhostPlayer)
                 {
                     GhostPlayerImports.Register(typeof(TuchData));
                     GhostPlayerImports.Register(typeof(TCPTuchData));
-                    GhostPlayerImports.RegisterCommandEvent(PlayerHooks.StartGameCommand);
-
-                    On.RainWorld.OnModsInit += RainWorld_OnModsInit;
+                    GhostPlayerImports.RegisterCommandEvent(PlayerHooks.StartGameCommand);   
                 }
+
+                On.RainWorld.OnModsInit += RainWorld_OnModsInit;
             }
             catch (Exception e)
             {
@@ -41,8 +41,14 @@ namespace Tuch
         private void RainWorld_OnModsInit(On.RainWorld.orig_OnModsInit orig, RainWorld self)
         {
             orig(self);
-            PlayerHooks.OnModsInit();
-            PlayerGraphicsHooks.OnModsInit();
+            enableGhostPlayer = GhostPlayerImports.Register != null;
+            if (enableGhostPlayer)
+            {
+                PlayerHooks.OnModsInit();
+                PlayerGraphicsHooks.OnModsInit();
+            }
+
+            HudHooks.OnModsInit();
         }
 
         public static void Log(string m)
