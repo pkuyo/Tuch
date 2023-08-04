@@ -139,8 +139,11 @@ namespace Tuch.Hooks
             InternalUpdateScroll(intIndex, lastIndex, floatIndex, timeStacker);
         }
 
-        void InternalPlaySound()
+        void InternalPlaySound(bool forcePlay = false)
         {
+            if (!reval && !forcePlay)
+                return;
+
             if (playerRef.TryGetTarget(out var player))
                 cam.room.PlaySound(SoundID.Gate_Clamp_Lock, player.mainBodyChunk, false, 1f, 40f + Random.value);
         }
@@ -244,24 +247,6 @@ namespace Tuch.Hooks
             }
         }
 
-
-        internal IEnumerable<PlayerHooks.PlayerModule> GetPlayerInRoom()
-        {
-            if (cam.room == null)
-                yield break;
-
-            foreach(var creature in cam.room.abstractRoom.creatures)
-            {
-                if (creature.realizedCreature == null || !(creature.realizedCreature is Player))
-                    continue;
-
-                Player player = creature.realizedCreature as Player;
-                if (PlayerHooks.modules.TryGetValue(player, out var hook))
-                    yield return hook;
-            }
-            yield break;
-        }
-
         FLabel GetNewDigiLabel()
         {
             return new FLabel(Custom.GetDisplayFont(), "")
@@ -331,7 +316,7 @@ namespace Tuch.Hooks
             if (!reval)
                 return;
             reval = false;
-            if (playSound) InternalPlaySound();
+            if (playSound) InternalPlaySound(true);
         }
     }
 }

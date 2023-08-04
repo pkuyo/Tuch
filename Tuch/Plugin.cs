@@ -45,7 +45,6 @@ namespace Tuch
             if (enableGhostPlayer)
             {
                 PlayerHooks.OnModsInit();
-                PlayerGraphicsHooks.OnModsInit();
             }
 
             HudHooks.OnModsInit();
